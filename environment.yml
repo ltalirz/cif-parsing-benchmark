@@ -1,0 +1,12 @@
+name: cif-benchmark
+channels:
+  - conda-forge
+dependencies:
+  - ase=3.17.0
+  - pycifrw=4.4.1
+  - snakeviz
+  - pip
+  - swig   # needed for building pycodcif
+  - pip:
+    - pymatgen==2018.12.12
+    - pycodcif==2.4
