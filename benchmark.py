@@ -32,12 +32,13 @@ elif package == 'pycodcif':
     read_cif = get_content
 
 extension='.cif'
-directory = '../structures_0100'
+directory = 'structures_0108'
 paths = glob.glob("{}/*{}".format(directory,extension))
 
-for idx, filename in enumerate(paths):
-  if filename.endswith(extension):
-    print("Reading {}".format(filename))
-    struct = read_cif(filename)
+if __name__ == '__main__':
+	for idx, filename in enumerate(paths):
+	  if filename.endswith(extension):
+	    print("Reading {}".format(filename))
+	    struct = read_cif(filename)
 
-print("Total number of structures: {}".format(idx+1))
+	print("Total number of structures: {}".format(idx+1))
