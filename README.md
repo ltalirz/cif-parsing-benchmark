@@ -3,21 +3,21 @@
 ## Goal
 Evaluate performance of python libraries for parsing CIF files.
 
-Candidates considered:
+Candidate libraries considered:
 
- * [ASE](https://pypi.org/project/ase/3.17.0) 3.17.0
+ * [ASE](https://pypi.org/project/ase/3.18.0) 3.18.0
  * [pymatgen](https://pypi.org/project/pymatgen/2018.12.12/) 2018.12.12
  * [pycifrw](https://pypi.org/project/PyCifRW/4.4.1/) 4.4.1
  * [pycodcif](https://pypi.org/project/pycodcif/2.4/) 2.4
 
-Note: For backwards compatibility, candidates should be python2 compatible.
+Note: For backwards compatibility, candidates need to be python2 compatible.
 
 Note: pymatgen was using pycifrw at some point, but dropped its support in
 pymatgen v3.0 (due to "issues with installation").
 
 ### Test sets
 
-* `structures_100.zip`: Basis test set with structures of several hundreds of atoms. 
+* `structures_100.zip`: Test set with structures of several hundreds of atoms. 
 * `structures_108.zip`: Extension of test set with structures with more than 11 000 atoms to also test memory usage and performance in extreme cases.
 
 ## Installation
@@ -43,7 +43,8 @@ python -m pstats pycofcif_100.prof # or inspect on the command line
 
 ### MacBook Pro 2015, Intel Core i7 2.2GHz, 512GB SSD
 
-* `ase_100.prof`: 98.3s spent in `read_cif`
+* `ase_100.prof`: 466s spent in `read_cif` (up from 98s in version 3.17)
+* `ase-pycodcif_100.prof`: 621s spent in `read_cif`
 * `pymatgen_100.prof`: 159.0s spent in `from_file`
 * `pycifrw_100.prof`: 91.6s spent in `ReadCif`
 * `pycifrw-fast_100.prof`: 17.6s spent in `ReadCif`

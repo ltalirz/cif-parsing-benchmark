@@ -2,7 +2,7 @@ name: cif-benchmark
 channels:
   - conda-forge
 dependencies:
-  - ase=3.17.0
+  - ase=3.18.0
   - pycifrw=4.4.1
   - snakeviz
   - pip

@@ -2,12 +2,18 @@
 import os
 import glob
 import sys
+import functools
 
 package=sys.argv[1]
 
 if package == 'ase':
     # ASE functions
     from ase.io import read as read_cif
+
+elif package == 'ase-pycodcif':
+    # ASE functions
+    from ase.io import read
+    read_cif = functools.partial(read, reader='pycodcif')
 
 elif package == 'pymatgen':
     # Pymatgen functions
@@ -32,7 +38,7 @@ elif package == 'pycodcif':
     read_cif = get_content
 
 extension='.cif'
-directory = 'structures_0108'
+directory = 'structures_0100'
 paths = glob.glob("{}/*{}".format(directory,extension))
 
 if __name__ == '__main__':
