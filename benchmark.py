@@ -4,36 +4,38 @@ import glob
 import sys
 
 package=sys.argv[1]
+structure_set=sys.argv[2]
 
 if package == 'ase':
-    # ASE functions
     from ase.io import read as read_cif
 
 elif package == 'pymatgen':
-    # Pymatgen functions
     from pymatgen import Structure
     read_cif = Structure.from_file
 
 elif package == 'pycifrw':
-    # PyCifRW
     from CifFile import ReadCif  as read_cif
 
 elif package == 'pycifrw-fast':
-    # PyCifRW
     from CifFile import ReadCif
     read_cif = lambda x: ReadCif(x, scantype="flex")
 
 elif package == 'pycodcif':
-    # pycodcif
     from pycodcif import parse
     def get_content(file):
         datablocks, error_count, error_messages = parse(file)
         return datablocks
     read_cif = get_content
 
+elif package == 'gemmi':
+    from gemmi.cif import read_file as read_cif
+
 extension='.cif'
-directory = 'structures_0108'
-paths = glob.glob("{}/*{}".format(directory,extension))
+directory = 'structures'
+
+paths = glob.glob("{}/str_*{}".format(directory,extension))
+if int(structure_set) == 105:
+    paths += glob.glob("{}/large_*{}".format(directory,extension))
 
 if __name__ == '__main__':
 	for idx, filename in enumerate(paths):
@@ -41,4 +43,4 @@ if __name__ == '__main__':
 	    print("Reading {}".format(filename))
 	    struct = read_cif(filename)
 
-	print("Total number of structures: {}".format(idx+1))
+	print("Total number of structures: {}".format(len(paths)))
